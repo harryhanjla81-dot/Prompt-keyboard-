@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/keyboard_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/keyboard_background"
+    android:paddingBottom="4dp">
+
+    <!-- Top Toolbar -->
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:background="#22000000">
+
+        <!-- Keyboard Tab Icon -->
+        <ImageButton
+            android:id="@+id/btn_toolbar_keyboard"
+            android:layout_width="38dp"
+            android:layout_height="36dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Keyboard"
+            android:src="@drawable/ic_keyboard"
+            android:tint="#FFFFFFFF" />
+
+        <!-- Quick Emoji Strip (horizontal scrollable) -->
+        <HorizontalScrollView
+            android:id="@+id/emoji_strip_scroll"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scrollbars="none"
+            android:fadingEdge="horizontal">
+
+            <LinearLayout
+                android:id="@+id/emoji_strip"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp" />
+        </HorizontalScrollView>
+
+        <!-- Clipboard Tab Icon -->
+        <ImageButton
+            android:id="@+id/btn_toolbar_clipboard"
+            android:layout_width="38dp"
+            android:layout_height="36dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Clipboard"
+            android:src="@drawable/ic_clipboard"
+            android:tint="#FFFFFFFF" />
+
+        <!-- Prompts Tab Icon -->
+        <LinearLayout
+            android:id="@+id/btn_toolbar_prompts"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
+            android:background="?android:attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:contentDescription="Prompts"
+                android:src="@drawable/ic_prompt"
+                android:tint="#FFFFFFFF" />
+
+            <TextView
+                android:id="@+id/tv_prompt_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="0"
+                android:textColor="#FF38BDF8"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Hide Keyboard / Return Button -->
+        <ImageButton
+            android:id="@+id/btn_toolbar_hide"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Hide Keyboard"
+            android:src="@drawable/ic_enter"
+            android:rotation="90"
+            android:tint="#80FFFFFF" />
+    </LinearLayout>
+
+    <!-- Main Content Area: switches between QWERTY, Prompts, and Clipboard -->
+    <FrameLayout
+        android:id="@+id/fl_content_container"
+        android:layout_width="match_parent"
+        android:layout_height="220dp">
+
+        <!-- 1. Normal QWERTY & Symbols Layout -->
+        <LinearLayout
+            android:id="@+id/layout_keyboard_keys"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <!-- Row 1: q w e r t y u i o p -->
+            <LinearLayout
+                android:id="@+id/row_1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal" />
+
+            <!-- Row 2: a s d f g h j k l -->
+            <LinearLayout
+                android:id="@+id/row_2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal" />
+
+            <!-- Row 3: Shift z x c v b n m Backspace -->
+            <LinearLayout
+                android:id="@+id/row_3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal" />
+
+            <!-- Row 4: ?123 , space . Enter -->
+            <LinearLayout
+                android:id="@+id/row_4"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal" />
+        </LinearLayout>
+
+        <!-- 2. Prompt Tab Panel -->
+        <LinearLayout
+            android:id="@+id/layout_prompts_panel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp">
+
+            <!-- Prompt Header -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_prompt_header_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="PROMPTS"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.1" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <!-- Upload / Replace JSON Button -->
+                    <TextView
+                        android:id="@+id/btn_prompt_header_upload"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:background="@drawable/key_special_background"
+                        android:gravity="center"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:text="Upload JSON"
+                        android:textColor="#FF38BDF8"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <!-- Return to Keyboard Button -->
+                    <TextView
+                        android:id="@+id/btn_prompt_close"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/key_special_background"
+                        android:gravity="center"
+                        android:text="✕"
+                        android:textColor="#B3FFFFFF"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- Empty Prompts State -->
+            <LinearLayout
+                android:id="@+id/layout_prompts_empty"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No prompts loaded"
+                    android:textColor="#B3FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Upload a JSON file containing prompt parts"
+                    android:textColor="#80FFFFFF"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btn_upload_json_empty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/button_use_part_bg"
+                    android:text="Upload JSON File"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp" />
+            </LinearLayout>
+
+            <!-- Loaded Prompts List (Scrollable) -->
+            <ScrollView
+                android:id="@+id/scroll_prompts_list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:scrollbars="vertical"
+                android:fadeScrollbars="false">
+
+                <LinearLayout
+                    android:id="@+id/container_prompt_items"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="4dp" />
+            </ScrollView>
+        </LinearLayout>
+
+        <!-- 3. Clipboard Tab Panel -->
+        <LinearLayout
+            android:id="@+id/layout_clipboard_panel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp">
+
+            <!-- Clipboard Header -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="CLIPBOARD"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.1" />
+
+                <TextView
+                    android:id="@+id/btn_clipboard_close"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/key_special_background"
+                    android:gravity="center"
+                    android:text="✕"
+                    android:textColor="#B3FFFFFF"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+            <!-- Clipboard Content -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/layout_clipboard_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:id="@+id/card_clipboard_item"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/panel_card_background"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <TextView
+                            android:id="@+id/tv_clipboard_preview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLines="4"
+                            android:ellipsize="end"
+                            android:textColor="#FFFFFFFF"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="Tap to insert"
+                            android:textColor="#FF38BDF8"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_clipboard_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No recent items in clipboard"
+                        android:textColor="#B3FFFFFF"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Copy any text to see it here"
+                        android:textColor="#80FFFFFF"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

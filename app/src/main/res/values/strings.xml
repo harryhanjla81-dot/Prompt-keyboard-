@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Prompt Keyboard</string>
+    <string name="ime_name">Prompt Keyboard</string>
+    <string name="ime_settings">Prompt Keyboard Settings</string>
+
+    <!-- Setup Activity -->
+    <string name="setup_title">Prompt Keyboard Setup</string>
+    <string name="setup_subtitle">Enable and select Prompt Keyboard to use it across WhatsApp, Chrome, ChatGPT, Notes, and all your apps.</string>
+    <string name="step_1_title">Step 1: Enable Keyboard</string>
+    <string name="step_1_desc">Turn on Prompt Keyboard in your device\'s system keyboard settings.</string>
+    <string name="step_1_button">Enable in Settings</string>
+    <string name="step_1_status_enabled">✓ Enabled in system</string>
+    <string name="step_1_status_disabled">Not yet enabled</string>
+
+    <string name="step_2_title">Step 2: Select Keyboard</string>
+    <string name="step_2_desc">Switch your active input method to Prompt Keyboard.</string>
+    <string name="step_2_button">Switch Input Method</string>
+    <string name="step_2_status_active">✓ Currently Active</string>
+    <string name="step_2_status_inactive">Not active</string>
+
+    <string name="test_field_hint">Tap here to test Prompt Keyboard…</string>
+    <string name="prompts_overview_title">Loaded Prompts</string>
+    <string name="upload_json_button">Upload JSON File</string>
+    <string name="clear_prompts_button">Clear Prompts</string>
+    <string name="no_prompts_loaded">No prompts loaded</string>
+    <string name="no_prompts_desc">Upload a JSON file containing prompts or parts to use them directly from the keyboard.</string>
+
+    <!-- Keyboard IME UI -->
+    <string name="tab_keyboard">Keyboard</string>
+    <string name="tab_clipboard">Clipboard</string>
+    <string name="tab_prompts">Prompts</string>
+    <string name="tab_settings">Settings</string>
+
+    <string name="clipboard_title">CLIPBOARD</string>
+    <string name="clipboard_empty">No recent items in clipboard</string>
+    <string name="clipboard_desc">Copy text anywhere and it will be available here for quick insertion.</string>
+    <string name="prompts_title">PROMPTS</string>
+    <string name="use_part_format">Use Part %d</string>
+    <string name="part_label_format">Part %d</string>
+    <string name="replace_prompts_confirm">Replace current prompts with new file?</string>
+    <string name="prompts_loaded_toast">%d prompt parts loaded</string>
+    <string name="no_prompts_found">No prompts found in this file.</string>
+    <string name="invalid_json_file">Invalid JSON file.</string>
+    <string name="file_read_error">Could not read file.</string>
+</resources>

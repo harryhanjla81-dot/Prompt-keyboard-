@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Layer-list implementing the translucent dark glass background with subtle indigo-slate atmospheric gradient -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="135"
+                android:startColor="#F0090D16"
+                android:centerColor="#EA131828"
+                android:endColor="#F00F172A"
+                android:type="linear" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="90"
+                android:startColor="#B3050811"
+                android:endColor="#661E1B4B"
+                android:type="linear" />
+        </shape>
+    </item>
+</layer-list>

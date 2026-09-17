@@ -1,0 +1,6 @@
+{
+  "name": "Prompt Keyboard",
+  "description": "A custom translucent Android keyboard with quick JSON prompt parts injection, clipboard history, and responsive glass UI.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
